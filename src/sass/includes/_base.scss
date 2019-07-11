@@ -1,0 +1,27 @@
+@import "variables";
+// @import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+}
