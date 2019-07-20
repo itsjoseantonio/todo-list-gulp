@@ -2,47 +2,52 @@ var app = (function () {
 
 	var input = document.getElementById('input-task'),
 		button = document.getElementById('add'),
-		checks = document.querySelectorAll('.check'),
 		list = document.getElementById('listTask')
 
 	// Private Methods
 	var createElement = function () {
-		var ele = document.createElement('li');
-		var li = '<div class="check">' + '</div>' + '<p>' + input.value + '</p>' + '<div class="delete"></div>';
-		ele.insertAdjacentHTML('afterbegin', li)
-		return ele
+		var li = document.createElement('li');
+		var ele = '<div class="check">' + '</div>' + '<p>' + input.value + '</p>' + '<div class="delete"></div>';
+		li.insertAdjacentHTML('afterbegin', ele)
+		return li
 	}
 
 	var addTask = function () {
-		button.addEventListener('click', function () {
-			console.log(input.value, this.id);
-			list.appendChild(createElement());
-			input.value = '';
-			input.focus();
-		})
+		list.appendChild(createElement());
+		input.value = '';
+		input.focus();
+		checkTask();
 	}
 
 	var checkTask = function () {
-		for (let check of checks) {
-			console.log(check)
-			check.addEventListener('click', function () {
-				if (this.classList.contains('active')) {
-					this.classList.remove('active');
-				} else {
-					this.classList.add('active')
-				}
-			})
+		var checks = document.getElementsByClassName('check');
+		console.log(checks)
+		for (var i = 0; i <= checks.length; i++) {
+			checks[i].addEventListener('click', function () {
+				console.log(checks.length, this);
+			});
 		}
+		// checks.addEventListener('click', function (e) {
+		// 	console.log(e, 'click!')
+		// 	this.classList.toggle('active');
+		// 	// if (!this.classList.contains('active')) {
+		// 	// 	this.classList.add('active');
+		// 	// } else {
+		// 	// 	this.classList.remove('active')
+		// 	// }
+		// })
 	}
 
+	button.addEventListener('click', addTask);
+	// button.addEventListener('click', checkTask);
 
 	return {
-		addTask: addTask,
+		// addTask: addTask,
 		checkTask: checkTask,
 		createElement: createElement
 	}
 })();
 
-app.addTask();
+// app.addTask();
 app.createElement();
 app.checkTask();
