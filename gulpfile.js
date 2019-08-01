@@ -64,7 +64,7 @@ gulp.task('javascript', function () {
 			presets: ['@babel/preset-env']
 		})))
 		.pipe(concat('script.js'))
-		.pipe(gulpif(options.uglifyJS, uglify()))
+		//.pipe(gulpif(options.uglifyJS, uglify()))
 		.pipe(gulpif(options.sourceMaps, sourcemaps.write('../maps')))
 		.pipe(gulp.dest(paths.output.js))
 		.pipe(browserSync.reload({

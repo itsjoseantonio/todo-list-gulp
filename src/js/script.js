@@ -1,53 +1,61 @@
 var app = (function () {
-
-	var input = document.getElementById('input-task'),
-		button = document.getElementById('add'),
-		list = document.getElementById('listTask')
+	var input = document.getElementById("input-task"),
+		button = document.getElementById("add"),
+		list = document.getElementById("listTask");
 
 	// Private Methods
 	var createElement = function () {
-		var li = document.createElement('li');
-		var ele = '<div class="check">' + '</div>' + '<p>' + input.value + '</p>' + '<div class="delete"></div>';
-		li.insertAdjacentHTML('afterbegin', ele)
-		return li
-	}
+		var li = document.createElement("li");
+		var ele =
+			'<div class="check">' +
+			"</div>" +
+			"<p>" +
+			input.value +
+			"</p>" +
+			'<div class="delete"></div>';
+		li.insertAdjacentHTML("afterbegin", ele);
+		return li;
+	};
 
 	var addTask = function () {
-		list.appendChild(createElement());
-		input.value = '';
-		input.focus();
-		checkTask();
-	}
+		if (input.value == "") {
+			input.style.border = "1px solid red";
+			input.focus();
+			inputTyping();
+		} else {
+			list.appendChild(createElement());
+			checkTask();
+			deleteTask();
+			input.value = "";
+		}
+	};
 
 	var checkTask = function () {
-		var checks = document.getElementsByClassName('check');
-		console.log(checks)
-		for (var i = 0; i <= checks.length; i++) {
-			checks[i].addEventListener('click', function () {
-				console.log(checks.length, this);
-			});
-		}
-		// checks.addEventListener('click', function (e) {
-		// 	console.log(e, 'click!')
-		// 	this.classList.toggle('active');
-		// 	// if (!this.classList.contains('active')) {
-		// 	// 	this.classList.add('active');
-		// 	// } else {
-		// 	// 	this.classList.remove('active')
-		// 	// }
-		// })
+		var lastli = list.lastChild,
+			check = lastli.getElementsByClassName('check');
+		check[0].addEventListener("click", function () {
+			check[0].classList.toggle("active");
+		});
 	}
 
-	button.addEventListener('click', addTask);
-	// button.addEventListener('click', checkTask);
+	var deleteTask = function () {
+		var lastli = list.lastChild,
+			del = lastli.getElementsByClassName('delete');
+		del[0].addEventListener('click', function (e) {
+			del[0].parentNode.remove();
+		})
+	}
+
+	var inputTyping = function () {
+		input.addEventListener('keydown', function () {
+			this.style.border = "1px solid transparent";
+		})
+	}
+
+	button.addEventListener("click", addTask);
 
 	return {
 		// addTask: addTask,
-		checkTask: checkTask,
 		createElement: createElement
-	}
+	};
 })();
-
-// app.addTask();
-app.createElement();
-app.checkTask();

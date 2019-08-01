@@ -56,6 +56,7 @@
         border-radius: 8px;
         outline: none;
         width: 100%;
+        border: 1px solid transparent;
       }
 
       button {
@@ -87,6 +88,10 @@
           position: relative;
           align-items: center;
           margin-bottom: 15px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
 
           .check {
             width: 21px;
