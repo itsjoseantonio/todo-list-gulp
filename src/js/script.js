@@ -1,7 +1,11 @@
 var app = (function () {
 	var input = document.getElementById("input-task"),
 		button = document.getElementById("add"),
-		list = document.getElementById("listTask");
+		list = document.getElementById("listTask"),
+		today = document.getElementById('today'),
+		date = new Date(),
+		hour = date.getHours(),
+		minutes = date.getMinutes();
 
 	// Private Methods
 	var createElement = function () {
@@ -12,6 +16,9 @@ var app = (function () {
 			"<p>" +
 			input.value +
 			"</p>" +
+			"<span>" +
+			hour + ":" + minutes +
+			"</span>" +
 			'<div class="delete"></div>';
 		li.insertAdjacentHTML("afterbegin", ele);
 		return li;
@@ -52,10 +59,24 @@ var app = (function () {
 		})
 	}
 
+	var getDate = function () {
+		var dayMonth = date.getDate();
+		var dayWeek = date.getDay() - 1;
+		var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+		for (let i = 0; i <= days.length; i++) {
+			today.textContent = days[dayWeek] + ', ' + dayMonth;
+		}
+	}
+
+	// Add Events
 	button.addEventListener("click", addTask);
 
 	return {
-		// addTask: addTask,
-		createElement: createElement
+		getDate: getDate,
+		checkTask: checkTask
 	};
+
 })();
+
+app.getDate();
+// app.checkTask();
